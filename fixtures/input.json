@@ -1,0 +1,8 @@
+{
+  "orders": [
+    {"command": "sell", "price": 100.003, "amount": 2.4},
+    {"command": "buy", "price": 100.003, "amount": 3.4},
+    {"command": "buy", "price": 95.003, "amount": 2},
+    {"command": "sell", "price": 104.003, "amount": 1}
+  ]
+}
