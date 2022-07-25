@@ -2,6 +2,16 @@
 
 **TODO: Add description**
 
+## TODO
+- Read Json File ✅
+- Build Model ✅
+- Parse Json to Model ✅
+- Write Model to Json File
+
+## Setup
+```shell
+mix deps.get
+```
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
