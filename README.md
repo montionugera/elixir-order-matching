@@ -6,7 +6,8 @@
 - Read Json File ✅
 - Build Model ✅
 - Parse Json to Model ✅
-- Write Model to Json File
+- Build Buy Sell Section ✅
+- Write Section to Json File ✅
 
 ## Setup
 ```shell
