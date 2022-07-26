@@ -1,4 +1,4 @@
-defmodule OrderMatchingEngine.BuySellSectionModel do
+defmodule OrderMatchingEngine.OrderBookModel do
   @moduledoc """
   Data model for `Buy and Sell section`.
   """

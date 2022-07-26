@@ -3,11 +3,13 @@
 **TODO: Add description**
 
 ## TODO
-- Read Json File ✅
-- Build Model ✅
-- Parse Json to Model ✅
-- Build Buy Sell Section ✅
-- Write Section to Json File ✅
+- ✅ Read Json File
+- ✅ Build Model
+- ✅ Parse Json to Model 
+- ✅ Build Buy Sell Section 
+- ✅ Write Section to Json File 
+- ✅ Matching Engine (Time Priority) 
+- ✅ Order Book (list of orders, A matching engine uses the book to determine which orders can be fulfilled i.e. what trades can be made.)
 
 ## Setup
 ```shell
