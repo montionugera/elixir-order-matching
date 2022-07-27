@@ -158,25 +158,21 @@ defmodule OrderMatchingEngine do
 
   """
   def matching_orders(new_order, sorted_booking_orders) do
-    IO.puts("matching_orders start")
     {after_matching_orders, volume_left} =
       Enum.map_reduce(
         sorted_booking_orders,
         new_order.volume,
         fn order, volume_left ->
-          matched_volume_in_decimal = Enum.min([volume_left, order.volume]) |> Decimal.from_float
-          cal_vol = order.volume - Enum.min([volume_left, order.volume])
-          IO.puts("cal #{order.volume} - #{Enum.min([volume_left, order.volume])} = #{cal_vol}")
-          IO.puts("volume_left #{volume_left} - #{Enum.min([volume_left, order.volume])}= #{volume_left - Enum.min([volume_left, order.volume])}\n")
+          matched_volume_in_decimal = 0.0+Enum.min([volume_left, order.volume]) |> Decimal.from_float
           {%{order |
-            volume: order.volume
+            volume: 0.0+order.volume
                     |> Decimal.from_float
                     |> Decimal.sub( matched_volume_in_decimal)
                     |> Decimal.to_float},
-           volume_left
-           |> Decimal.from_float
-           |> Decimal.sub( matched_volume_in_decimal)
-           |> Decimal.to_float }
+            0.0+volume_left
+              |> Decimal.from_float
+              |> Decimal.sub( matched_volume_in_decimal)
+              |> Decimal.to_float }
         end
       )
 
