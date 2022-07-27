@@ -86,8 +86,7 @@ defmodule OrderMatchingEngine do
             |> Enum.sort_by(& &1.price, :desc)
       }
     else
-      {matchable_orders, not_matchable_orders} =
-        Enum.split_with(order_book.buy, &(&1.price >= new_order.price))
+      {matchable_orders, not_matchable_orders} = Enum.split_with order_book.buy  &(&1.price >= new_order.price)
 
       {order_left, after_matching_buy_orders} = matching_orders(order_info, matchable_orders)
       after_matching_buy_orders = after_matching_buy_orders ++ not_matchable_orders
@@ -130,9 +129,7 @@ defmodule OrderMatchingEngine do
       |> Enum.reduce(
         %{},
         fn order, orders_by_price ->
-          Map.put( orders_by_price, order.price,
-            Map.get(orders_by_price, order.price, []) ++ [order]
-          )
+          orders_by_price |> Map.put order.price, Map.get(orders_by_price, order.price, []) ++ [order]
         end
       )
 
