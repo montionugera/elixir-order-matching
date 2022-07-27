@@ -30,3 +30,6 @@ _build
 
 .idea
 .vscode
+
+input.json
+output.json

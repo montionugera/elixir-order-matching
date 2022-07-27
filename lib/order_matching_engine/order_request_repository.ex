@@ -8,8 +8,8 @@ defmodule OrderRequestRepository do
 
   ## Examples
 
-      iex> OrderRequestRepository.get('fixtures/input.json')
-      {:ok,
+    iex> OrderRequestRepository.get('fixtures/input.json')
+    {:ok,
       %OrderMatchingEngine.OrderRequest{
        orders: [
          %OrderMatchingEngine.OrderRequestItem{amount: 2.4, command: "sell", price: 100.003},
@@ -25,7 +25,7 @@ defmodule OrderRequestRepository do
              as: %OrderMatchingEngine.OrderRequest{orders: [%OrderMatchingEngine.OrderRequestItem{}]}) do
       {:ok, order_input}
     else
-      _ -> {:error, nil}
+      _ -> raise "Could not get OrderRequest from file: " + filename
     end
 
   end
