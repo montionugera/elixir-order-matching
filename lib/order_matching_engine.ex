@@ -4,34 +4,7 @@ defmodule OrderMatchingEngine do
   """
 
   @doc """
-  Load order from file
-
-  ## Examples
-
-      iex> OrderMatchingEngine.load_orders_from_file('fixtures/input.json')
-      {:ok,
-      %OrderMatchingEngine.OrderInput{
-       orders: [
-         %OrderMatchingEngine.OrderElement{amount: 2.4, command: "sell", price: 100.003},
-         %OrderMatchingEngine.OrderElement{amount: 3.4, command: "buy", price: 100.003},
-         %OrderMatchingEngine.OrderElement{amount: 2, command: "buy", price: 95.003},
-         %OrderMatchingEngine.OrderElement{amount: 1, command: "sell", price: 104.003}
-       ]
-      }}
-  """
-  def load_orders_from_file(filename) do
-    with {:ok, body} <- File.read(filename),
-         {:ok, order_input} <-
-           Poison.decode(body,
-             as: %OrderMatchingEngine.OrderInput{orders: [%OrderMatchingEngine.OrderElement{}]}
-           ) do
-      order_input |> inspect |> IO.puts()
-      {:ok, order_input}
-    end
-  end
-
-  @doc """
-  Add order to OrderBookModel, which automatically matching the order or / and put the order in the booking order
+  Add order to OrderBookModel, which automatically matching the order or / and put the order in the booking order.
 
   ## Examples
 
@@ -47,7 +20,7 @@ defmodule OrderMatchingEngine do
     ...>  %OrderMatchingEngine.OrderInfo{price: 120.003, volume: 2.4}
     ...>]
     ...>}
-    iex> order = %OrderMatchingEngine.OrderElement{amount: 8.4, command: "buy", price: 105.003}
+    iex> order = %OrderMatchingEngine.OrderRequestItem{amount: 8.4, command: "buy", price: 105.003}
     iex> OrderMatchingEngine.add_order_to_order_book(order,order_book)
     %OrderMatchingEngine.OrderBookModel{
     buy: [%OrderMatchingEngine.OrderInfo{price: 105.003, volume: 5.0},
@@ -179,26 +152,5 @@ defmodule OrderMatchingEngine do
       )
 
     {%{new_order | volume: volume_left}, after_matching_orders}
-  end
-
-  @doc """
-  Write Order Book to file.
-
-  ## Examples
-    iex> order_section = %OrderMatchingEngine.OrderBookModel{ buy: [
-    ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 3.4},
-    ...> ],
-    ...> sell: [
-    ...>    %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 2.4},
-    ...>  ]
-    ...>  }
-    iex> filename = 'tmp/output.json'
-    iex> OrderMatchingEngine.write_order_book(order_section,filename)
-    iex> File.read(filename)
-    {:ok, ~s({"sell":[{"volume":2.4,"price":100.003}],"buy":[{"volume":3.4,"price":130.003}]})}
-  """
-  def write_order_book(order_section, filename \\ "output.json") do
-    File.rm(filename)
-    File.write(filename, Poison.encode!(order_section), [:binary])
   end
 end

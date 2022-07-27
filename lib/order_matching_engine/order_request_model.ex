@@ -1,11 +1,11 @@
-defmodule OrderMatchingEngine.OrderInput do
+defmodule OrderMatchingEngine.OrderRequest do
   @moduledoc """
   Data model for `OrderInput`.
   """
   defstruct [:orders]
 end
 
-defmodule OrderMatchingEngine.OrderElement do
+defmodule OrderMatchingEngine.OrderRequestItem do
   @moduledoc """
   Data model for `OrderElement`.
   """

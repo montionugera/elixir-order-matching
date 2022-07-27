@@ -17,7 +17,7 @@ mix deps.get
 ```
 ## Testing
 ```shell
-mix test
+mix test test/*
 ```
 ## Installation
 
