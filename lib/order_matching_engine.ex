@@ -164,8 +164,7 @@ defmodule OrderMatchingEngine do
         new_order.volume,
         fn order, volume_left ->
           matched_volume_in_decimal = 0.0+Enum.min([volume_left, order.volume]) |> Decimal.from_float
-          {%{order |
-            volume: 0.0+order.volume
+          {%{order | volume: 0.0+order.volume
                     |> Decimal.from_float
                     |> Decimal.sub( matched_volume_in_decimal)
                     |> Decimal.to_float},
