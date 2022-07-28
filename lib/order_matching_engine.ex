@@ -101,16 +101,16 @@ defmodule OrderMatchingEngine do
 
   ## Examples
       iex> orders = [
-        ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
-        ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.1},
-        ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
-        ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2},
-        ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 0.1}
-        ...> ]
-        iex> OrderMatchingEngine.squash_orders(orders)
-        [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.5},
-          %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
-          %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.1}]
+      ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
+      ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.1},
+      ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
+      ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2},
+      ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 0.1}
+      ...> ]
+      iex> OrderMatchingEngine.squash_orders(orders)
+      [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.5},
+        %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
+        %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.1}]
   """
   def squash_orders(sorted_orders) do
     orders_by_price =

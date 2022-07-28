@@ -19,10 +19,10 @@ defmodule OrderBookRepository do
       iex> filename = 'tmp/output.json'
       iex> OrderBookRepository.save(order_book,filename)
       iex> File.read(filename)
-      {:ok, ~s({"sell":[{"volume":2.4,"price":100.003}],"buy":[{"volume":3.4,"price":130.003}]})}
+      {:ok,~s({\\n  "sell": [\\n    {\\n      "volume": 2.4,\\n      "price": 100.003\\n    }\\n  ],\\n  "buy": [\\n    {\\n      "volume": 3.4,\\n      "price": 130.003\\n    }\\n  ]\\n})}
   """
   def save(order_book, filename \\ "output.json") do
     File.rm(filename)
-    File.write(filename, Poison.encode!(order_book), [:binary])
+    File.write(filename, Poison.encode!(order_book, pretty: true), [:binary])
   end
 end
