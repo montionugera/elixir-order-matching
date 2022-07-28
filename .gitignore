@@ -29,3 +29,7 @@ deps
 _build
 
 .idea
+.vscode
+
+input.json
+output.json
