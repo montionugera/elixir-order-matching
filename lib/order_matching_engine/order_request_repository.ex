@@ -8,16 +8,16 @@ defmodule OrderRequestRepository do
 
   ## Examples
 
-    iex> OrderRequestRepository.get('fixtures/input.json')
-    {:ok,
-      %OrderMatchingEngine.OrderRequest{
-       orders: [
-         %OrderMatchingEngine.OrderRequestItem{amount: 2.4, command: "sell", price: 100.003},
-         %OrderMatchingEngine.OrderRequestItem{amount: 3.4, command: "buy", price: 100.003},
-         %OrderMatchingEngine.OrderRequestItem{amount: 2, command: "buy", price: 95.003},
-         %OrderMatchingEngine.OrderRequestItem{amount: 1, command: "sell", price: 104.003}
-       ]
-      }}
+      iex> OrderRequestRepository.get('fixtures/input.json')
+      {:ok,
+        %OrderMatchingEngine.OrderRequest{
+         orders: [
+           %OrderMatchingEngine.OrderRequestItem{amount: 2.4, command: "sell", price: 100.003},
+           %OrderMatchingEngine.OrderRequestItem{amount: 3.4, command: "buy", price: 100.003},
+           %OrderMatchingEngine.OrderRequestItem{amount: 2, command: "buy", price: 95.003},
+           %OrderMatchingEngine.OrderRequestItem{amount: 1, command: "sell", price: 104.003}
+         ]
+        }}
   """
   def get(filename) do
     with {:ok, body} <- File.read(filename),

@@ -9,11 +9,11 @@ defmodule OrderMatchingEngine do
   Build Order book from order request file.
 
   ## Examples
-    iex> OrderMatchingEngine.build_order_book_from_order_request_file('fixtures/input.json')
-    %OrderMatchingEngine.OrderBookModel{
-    buy: [%OrderMatchingEngine.OrderInfo{price: 100.003, volume: 1.0},
-          %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}],
-    sell: [%OrderMatchingEngine.OrderInfo{price: 104.003, volume: 1}]}
+      iex> OrderMatchingEngine.build_order_book_from_order_request_file('fixtures/input.json')
+      %OrderMatchingEngine.OrderBookModel{
+      buy: [%OrderMatchingEngine.OrderInfo{price: 100.003, volume: 1.0},
+            %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}],
+      sell: [%OrderMatchingEngine.OrderInfo{price: 104.003, volume: 1}]}
 
   """
   def build_order_book_from_order_request_file(order_request_file) do
@@ -23,34 +23,33 @@ defmodule OrderMatchingEngine do
   end
 
   @doc """
-  Add order to OrderBookModel, which automatically matching the order or / and put the order in the booking order.
+  Add order to `OrderBookModel`, which automatically matching the order `and/or` put the order in the booking order.
 
   ## Examples
-
-    iex> order_book = %OrderMatchingEngine.OrderBookModel{
-    ...>buy: [
-    ...>  %OrderMatchingEngine.OrderInfo{price: 100.000, volume: 3.4},
-    ...>  %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
-    ...>],
-    ...>sell: [
-    ...>  %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 2.4},
-    ...>  %OrderMatchingEngine.OrderInfo{price: 104.003, volume: 1},
-    ...>  %OrderMatchingEngine.OrderInfo{price: 110.003, volume: 2.4},
-    ...>  %OrderMatchingEngine.OrderInfo{price: 120.003, volume: 2.4}
-    ...>]
-    ...>}
-    iex> order = %OrderMatchingEngine.OrderRequestItem{amount: 8.4, command: "buy", price: 105.003}
-    iex> OrderMatchingEngine.add_order_to_order_book(order,order_book)
-    %OrderMatchingEngine.OrderBookModel{
-    buy: [%OrderMatchingEngine.OrderInfo{price: 105.003, volume: 5.0},
-      %OrderMatchingEngine.OrderInfo{price: 100.000, volume: 3.4},
-      %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
-    ],
-    sell: [
-      %OrderMatchingEngine.OrderInfo{price: 110.003, volume: 2.4},
-      %OrderMatchingEngine.OrderInfo{price: 120.003, volume: 2.4}
-    ]
-    }
+      iex> order_book = %OrderMatchingEngine.OrderBookModel{
+      ...>buy: [
+      ...>  %OrderMatchingEngine.OrderInfo{price: 100.000, volume: 3.4},
+      ...>  %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
+      ...>],
+      ...>sell: [
+      ...>  %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 2.4},
+      ...>  %OrderMatchingEngine.OrderInfo{price: 104.003, volume: 1},
+      ...>  %OrderMatchingEngine.OrderInfo{price: 110.003, volume: 2.4},
+      ...>  %OrderMatchingEngine.OrderInfo{price: 120.003, volume: 2.4}
+      ...>]
+      ...>}
+      iex> order = %OrderMatchingEngine.OrderRequestItem{amount: 8.4, command: "buy", price: 105.003}
+      iex> OrderMatchingEngine.add_order_to_order_book(order,order_book)
+      %OrderMatchingEngine.OrderBookModel{
+      buy: [%OrderMatchingEngine.OrderInfo{price: 105.003, volume: 5.0},
+        %OrderMatchingEngine.OrderInfo{price: 100.000, volume: 3.4},
+        %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
+      ],
+      sell: [
+        %OrderMatchingEngine.OrderInfo{price: 110.003, volume: 2.4},
+        %OrderMatchingEngine.OrderInfo{price: 120.003, volume: 2.4}
+      ]
+      }
 
   """
   def add_order_to_order_book(new_order, order_book \\ %OrderMatchingEngine.OrderBookModel{}) do
@@ -98,20 +97,20 @@ defmodule OrderMatchingEngine do
   end
 
   @doc """
-    Squash Orders, To squash orders as sum of volume group by price.
+  Squash Orders, To squash orders as sum of volume group by price.
 
-    ## Examples
-    iex> orders = [
-    ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
-    ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.1},
-    ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
-    ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2},
-    ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 0.1}
-    ...> ]
-    iex> OrderMatchingEngine.squash_orders(orders)
-    [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.5},
-      %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
-      %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.1}]
+  ## Examples
+      iex> orders = [
+        ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
+        ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.1},
+        ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
+        ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2},
+        ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 0.1}
+        ...> ]
+        iex> OrderMatchingEngine.squash_orders(orders)
+        [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.5},
+          %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
+          %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.1}]
   """
   def squash_orders(sorted_orders) do
     orders_by_price =
@@ -139,22 +138,23 @@ defmodule OrderMatchingEngine do
   end
 
   @doc """
-    Matching Orders, To deduct volume in booking orders.
+  Matching Orders, To deduct volume in matching orders in booking orders.
 
-    ## Examples
-    iex> order = %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 3.4}
-    iex> orders = [
-    ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
-    ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
-    ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
-    ...> ]
-    iex> OrderMatchingEngine.matching_orders(order,orders)
-    {
-      %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.0},
-      [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.0},
-        %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 1.4},
-        %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.0}]
-    }
+  ## Examples
+
+        iex> order = %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 3.4}
+        iex> orders = [
+        ...> %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 1.4},
+        ...> %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 3.4},
+        ...> %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2}
+        ...> ]
+        iex> OrderMatchingEngine.matching_orders(order,orders)
+        {
+          %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.0},
+          [ %OrderMatchingEngine.OrderInfo{price: 130.003, volume: 0.0},
+            %OrderMatchingEngine.OrderInfo{price: 100.003, volume: 1.4},
+            %OrderMatchingEngine.OrderInfo{price: 95.003, volume: 2.0}]
+        }
 
   """
   def matching_orders(new_order, sorted_booking_orders) do
