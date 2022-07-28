@@ -16,11 +16,11 @@ Output of the matching engine is Order Book in `output.json`. The output has 2 a
 
 Buy section has Buy price, Buy volume.
 - Buy prices are ordered from high to low
-- Buy volume is accomulated of buy amount which lies in the same price.
+- Buy volume is accumulated of buy amount which lies in the same price.
 
 Sell section: Sell section has Sell price, Sell volume
 - Sell prices are ordered from low to high
-- Sell volume is accomulated of sell amount which lies in the same price.
+- Sell volume is accumulated of sell amount which lies in the same price.
 
 Output Examples:
 ```json
